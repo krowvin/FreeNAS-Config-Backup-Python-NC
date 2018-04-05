@@ -120,29 +120,35 @@ Make sure the configs are there, and that you can open them with a text editor. 
 ## [Automation] Running as a Cron Task through the FreeNAS GUI
 Now that you made sure the file can run at least once with no errors, as well as creating the configuration file, you should be able to create a cron job. 
 
+For the life of me, I can't always get the FreeNAS GUI to run cron tasks. Some work, some don't. (Usually those with extra packages fail)
 
-To do this, open the FreeNAS GUI in your web browser. Login and click tasks < Cron Jobs < Add Cron Job
-**PreNotes:** 
-* Type ```jls``` to see the Jail Hostname
-* change the command to suite your directory structure, don't forget the leading **.**
-* Rotate your run times from other system tasks
-* Uncheck Redirect Stdout after the first few runs, you can see the output in the console at the bottom of the screen (Enable the GUI console in the FreeNAS settings)
+So, what you can do instead, is create a cronjob within the Jail. 
+vi is great and all, but it's a pain to use on mobile (Which I find myself doing a lot). So lets change the default cron editor for FreeNAS. 
+1. Type  
 ```
-User: root
-Command: jexec <Hostname> csh ./mnt/scripts/BackupConfigs.py
-Short Description: Backup Configs
-Minute: Each selected minute > 37
-Hour: Each selected hour > 4
-Day of month: Each selected day of month > 8, 21
-Month: CHECKBOX ALL
-Day of Week: CHECKBOX ALL
-Redirect Stdout: Not Checked (Standard Output)
-Redirect Stderr: Not Checked (Standard Error Output)
-Enabled: Checkboxed
+nano ~/.cshrc
 ```
+Change setenv Editor vi to:
+```
+setenv Editor nano
+```
+Type ctrl + x > y > enter - to save
 
-**Test your cron task:**
-Click on the task *>* Click Run Now at the bottom of the screen
+2. Type ```exit``` to exit the jail, then re-enter your jail with ```jexec jailname csh```
+
+3. Edit crontab by typing:  
+```crontab -e```  
+4. Copy and paste this in (Right click to paste in nano)  
+```37 4 11,23 * * /usr/local/bin/python /mnt/scripts/BackupConfigs.py```
+This will run the backup at 4:37am on the 11th and 23rd of each month, iregardless of which day it is. 
+Type ctrl + x > y > enter - to save 
+5. Make sure your edit stuck:
+```crontab -l```
+
+Note: If you want to test your cron, you can change the run time to a few minutes past the edit. Wait for it, and check your nextcloud client. 
+
+Optionally you can view the cron tasks. Login to the jail and type:  
+```nano /var/log/cron``` or ```tail -15 /var/log/cron```  
 
 ## [Recovery] How would I use these files? 
 Lets say you make an edit to one of your configurations that breaks your sickrage instance, or maybe your history doesn't load for Tautulli's database. One option would be to copy the backup file and replace the current working database directly. 
