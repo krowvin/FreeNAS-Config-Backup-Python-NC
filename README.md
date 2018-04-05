@@ -6,7 +6,8 @@
 * You might even decide to email the file to yourself (Which I tried at first, until I ran into Google's email attachment limit)  
 [Bidule0hm](https://forums.freenas.org/index.php?members/bidule0hm.31801/) does [email the FreeNAS backup](https://forums.freenas.org/index.php?threads/scripts-to-report-smart-zpool-and-ups-status-hdd-cpu-t%C2%B0-hdd-identification-and-backup-the-config.27365/) to himself (among other things), you should check that out as I skipped it in this program. 
 
-## [Why?] What does it do?One of the best features, imo, of FreeNAS/BSD is that the jails are seperated. If one fails, you can delete it and create a new one.  
+## [Why?] What does it do?  
+One of the best features, imo, of FreeNAS/BSD is that the jails are seperated. If one fails, you can delete it and create a new one.  
 You even have the option to attach storage to these jails so that it persists through jail upgrades/deletions.  
 While this script is intended for use with Sickrage, Headphones, Sabnzbd, Tautulli (Formerly PlexPY), and NGINX.  
 You can upload just about any file with it.  
