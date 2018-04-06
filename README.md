@@ -29,7 +29,11 @@ jexec <jailID> csh
 ```pkg install python```  
 4. You will also need the webdav client, you can view the documentation [here](https://pypi.python.org/pypi/webdavclient/1.0.8)  
 To install the package I was able to type:  
-```easy_install webdavclient```  
+```
+pkg install python  
+python -m ensurepip  
+pip install webdavclient
+```  
 Assuming you are the root user of the jail, you won't need sudo  
 ###If you decide to clone the directory  
 4.1. Navigate to the directory where you uploaded your files, you might also be able to use:  
