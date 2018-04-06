@@ -33,6 +33,7 @@ To install the package I was able to type:
 pkg install python  
 python -m ensurepip  
 pip install webdavclient
+easy_install webdavclient
 ```  
 Assuming you are the root user of the jail, you won't need sudo  
 ###If you decide to clone the directory  
