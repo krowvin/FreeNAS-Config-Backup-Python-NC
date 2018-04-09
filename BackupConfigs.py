@@ -5,10 +5,8 @@ from zipfile  import ZipFile
 from os.path  import basename
 from os       import stat
 
-try: import webDavNC as WDNC
-except: print("Failed to import webDavNC.py - \
-        please add the file to this directory")
-        
+import webDavNC as WDNC
+
 #################################
 ##   Enable/Disable Backups    ##
 #################################
