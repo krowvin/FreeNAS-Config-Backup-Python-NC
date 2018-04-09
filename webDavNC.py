@@ -4,7 +4,7 @@
 #https://github.com/CloudPolis/webdav-client-python
 
 import webdav.client as wc
-from sys import exit
+from sys import exit, version_info
 from os  import chmod
 
 cert_path= "/etc/letsencrypt/live/sub.domain.com/fullchain.pem"
@@ -13,7 +13,7 @@ key_path = "/etc/letsencrypt/live/sub.domain.com/privkey.pem"
 class Login():
     def changePermissions(self, filePath):
         print("Setting Credential File Permissions to 400")
-        if sys.version_info[0] < 3:
+        if version_info[0] < 3:
             chmod(filePath,0400)
         else:
             chmod(filePath,0o400)
