@@ -7,9 +7,6 @@ import webdav.client as wc
 from sys import exit, version_info
 from os  import chmod
 
-cert_path= "/etc/letsencrypt/live/sub.domain.com/fullchain.pem"
-key_path = "/etc/letsencrypt/live/sub.domain.com/privkey.pem"
-
 class Login():
     def changePermissions(self, filePath):
         print("Setting Credential File Permissions to 400")
@@ -35,14 +32,13 @@ class Login():
                 options = {
                  'webdav_hostname': WebDAVURL,
                  'webdav_login':    MY_ADDRESS,
-                 'webdav_password': PASSWORD,
-                 'cert_path': cert_path,
-                 'key_path': key_path
+                 'webdav_password': PASSWORD
                 }
-                print("Connected")
                 client = wc.Client(options)
                 print("Saved Credentials to: %s"%credentialsFile)
                 connected = True
+                return client
+                
             except Exception as err:
                 connected = False
                 if failedCount > 3:
@@ -55,7 +51,6 @@ class Login():
                     print("Invalid Credentials: %s"%err)
                     print("Try again, or Ctrl + C to Exit:")
                     failedCount += 1          
-        return client
         
     def fetchCredentials(self, WebDAVURL,credentialsFile):
         try:
@@ -93,7 +88,7 @@ class Synchronous():
 
         
     def uploadFile(self, client, remotePath, localPath):
-        print("Uploading:\n %s \n\tto \n%s"%(localPath, remotePath))
+        print("Uploading:\n %s \n\tto \n%s\n"%(localPath, remotePath))
         print("\nThis Could Take a Minute\n")
         try: 
             client.upload_sync(remotePath, localPath)
@@ -101,4 +96,5 @@ class Synchronous():
         except Exception as err:
             print(err)
             print("Failed to upload %s"%localPath)
+            print("Check Your Credentials File")
 
