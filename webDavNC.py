@@ -66,7 +66,7 @@ class Login():
             print("\nNC Login Credentials Obtained")
             print("--------------------------")
             print("LOGIN:    %s"%MY_ADDRESS)
-            print("PASSWORD: %s\n"%('*'*len(PASSWORD)))
+            print("PASSWORD: %s\n"%(PASSWORD))
             self.changePermissions(credentialsFile)
             options = {
              'webdav_hostname': WebDAVURL,
