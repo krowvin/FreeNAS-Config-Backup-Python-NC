@@ -32,7 +32,7 @@ To install the package I was able to type:
 ```
 pkg update
 pkg upgrade
-pkg install python  
+pkg install python  python-libxml2-utils
 python -m ensurepip  
 pip install webdavclient
 easy_install webdavclient
