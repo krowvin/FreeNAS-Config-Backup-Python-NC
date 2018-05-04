@@ -30,6 +30,8 @@ jexec <jailID> csh
 4. You will also need the webdav client, you can view the documentation [here](https://pypi.python.org/pypi/webdavclient/1.0.8)  
 To install the package I was able to type:  
 ```
+pkg update
+pkg upgrade
 pkg install python  
 python -m ensurepip  
 pip install webdavclient
